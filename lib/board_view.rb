@@ -7,8 +7,11 @@ class BoardView
 
   def draw_board
     @board.board_cases.each do |index_line|
+        puts ''
+        print '|'
+        
       index_line.each do |index_column|
-        pp index_column.inner_content
+        print index_column.inner_content.to_s + '|'
       end
     end
   end

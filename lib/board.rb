@@ -13,4 +13,9 @@ class Board
     end
     @board_cases = board_tab
   end
+
+  def update_cases(modified_case_line, modified_case_column, player_symbol)
+    @board_cases[modified_case_line][modified_case_column].inner_content = player_symbol
+  end
+
 end
