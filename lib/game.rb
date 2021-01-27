@@ -1,19 +1,24 @@
 class Game
-    attr_accessor :players
+  attr_accessor :players
 
-def initialize_players
+  def initialize_players
     @players = []
     puts "Bienvenue Joueur 1 ! Quel est ton nom ?"
-    print '> '
+    print "> "
     player1_name = gets.chomp
     player1 = Player.new(player1_name)
     @players << player1
 
     puts "Au tour de Joueur 2 maintenant ! Comment tu t'appelles ?"
-    print '> '
+    print "> "
     player2_name = gets.chomp
     player2 = Player.new(player2_name)
     @players << player1
-end
+  end
 
+  def initialize_board
+    datas_board = Board.new(3)
+    visual_board = BoardView.new(datas_board)
+    visual_board.draw_board
+  end
 end
