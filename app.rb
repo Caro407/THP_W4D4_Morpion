@@ -8,4 +8,3 @@ require "pry"
 end
 
 game = Application.new
-

@@ -19,7 +19,7 @@ class Board
   end
 
   def is_case_available?(modified_case_line, modified_case_column)
-    @board_cases[modified_case_line][modified_case_column].inner_content == "_"
+    @board_cases[modified_case_line][modified_case_column].inner_content == " "
   end
 
   def line_victory(player)
@@ -68,17 +68,17 @@ class Board
 
   def match_is_even
     @board_cases.each do |line|
-      return false if line.any? { |cell| cell.inner_content == "_" }
+      return false if line.any? { |cell| cell.inner_content == " " }
     end
     return true
   end
 
   def won?(player)
     if line_victory(player) == true || column_victory(player) == true || diagonal_victory(player) == true
-      puts "Bravo #{player.name} ! Tu as gagné !"
+      puts "\e[93m Bravo #{player.name} ! Tu as gagné !\e[0m"
       return true
     elsif match_is_even == true
-      puts "Il n'y a plus de cases sur lesquelles jouer !"
+      puts "\e[91m Match nul ! \e[0m Il n'y a plus de cases sur lesquelles jouer !"
       return true
     else
       puts "Continuons à jouer !"

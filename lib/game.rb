@@ -10,16 +10,16 @@ class Game
   def initialize_players(nb_of_players = 2)
     @players = []
     symbols = ["x", "o"]
-
+    puts "Bienvenue Joueurs ! Comment vous appelez-vous ?"
     nb_of_players.times do |player_nb|
-      puts "Bienvenue Joueur ! Quel est ton nom ?"
       print "> "
       player_name = gets.chomp
+      puts "#{player_name}, tu seras Joueur #{player_nb + 1}."
       player = Player.new(player_name)
       player.symbol = symbols[player_nb % symbols.length]
       @players << player
     end
-
+    sleep(2)
     return @players
   end
 
@@ -64,7 +64,7 @@ class Game
     pursue_game = true
     while pursue_game == true
       @players.each do |player|
-         # On nettoie le tableau.
+        # On nettoie le tableau.
         system "clear"
         # On affiche la grille à jour.
         @visual_board.draw_board
@@ -82,7 +82,7 @@ class Game
 
         # On regarde si, par son action, le joueur a mis fin au jeu.
         if @datas_board.won?(player) == true
-          pursue_game = !@datas_board.won?(player)
+          pursue_game = false
           @visual_board.draw_board
           break
         end
