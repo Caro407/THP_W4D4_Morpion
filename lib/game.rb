@@ -64,6 +64,8 @@ class Game
     pursue_game = true
     while pursue_game == true
       @players.each do |player|
+         # On nettoie le tableau.
+        system "clear"
         # On affiche la grille à jour.
         @visual_board.draw_board
 
@@ -72,7 +74,7 @@ class Game
         # Conditions pour modifier la case :
         # 1. qu'il ne se soit pas trompé dans l'écriture de son choix ET # 2. qu'elle soit libre
         while valid_input == false
-          chosen_case = player.chose_case_to_play
+          chosen_case = player.chose_case_to_play(player)
           case_line, case_column = translate_player_decision(chosen_case)
           valid_input = case_line != false && @datas_board.is_case_available?(case_line, case_column) == true
         end
@@ -81,6 +83,7 @@ class Game
         # On regarde si, par son action, le joueur a mis fin au jeu.
         if @datas_board.won?(player) == true
           pursue_game = !@datas_board.won?(player)
+          @visual_board.draw_board
           break
         end
       end

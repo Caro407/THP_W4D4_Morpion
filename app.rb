@@ -7,6 +7,5 @@ require "pry"
   require_relative "lib/#{file}"
 end
 
-#test = Game.new
+game = Application.new
 
-binding.pry

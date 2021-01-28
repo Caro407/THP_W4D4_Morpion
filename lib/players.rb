@@ -6,7 +6,9 @@ class Player
     @symbol = symbol
   end
 
-  def chose_case_to_play
+  def chose_case_to_play(player)
+    puts "\n"
+    puts "A votre tour #{player.name} !"
     puts "Quelle case souhaitez-vous choisir ?"
     print "> "
     choice = gets.chomp

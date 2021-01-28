@@ -6,8 +6,11 @@ class BoardView
   end
 
   def draw_board
-    @board.board_cases.each do |index_line|
+    print "  1 2 3 "
+    @board.board_cases.each_with_index do |index_line, index|
+      letter = (index + 65).chr
       puts ""
+      print "#{letter}"
       print "|"
 
       index_line.each do |index_column|
