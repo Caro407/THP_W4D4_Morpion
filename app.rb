@@ -7,7 +7,6 @@ require "pry"
   require_relative "lib/#{file}"
 end
 
-test = Game.new
-test.initialize_board
+#test = Game.new
 
 binding.pry

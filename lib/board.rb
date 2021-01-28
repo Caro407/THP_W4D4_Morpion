@@ -18,4 +18,7 @@ class Board
     @board_cases[modified_case_line][modified_case_column].inner_content = player_symbol
   end
 
+  def is_case_available?(modified_case_line, modified_case_column)
+    @board_cases[modified_case_line][modified_case_column].inner_content == "_"
+  end
 end
