@@ -21,4 +21,68 @@ class Board
   def is_case_available?(modified_case_line, modified_case_column)
     @board_cases[modified_case_line][modified_case_column].inner_content == "_"
   end
+
+  def line_victory(player)
+    @board_cases.each do |line|
+      nb_of_symbols_player = line.count { |cell| cell.inner_content == player.symbol }
+      return true if nb_of_symbols_player == 3
+    end
+    return false
+  end
+
+  def column_victory(player)
+    (0..2).each do |col_nb|
+      nb_of_symbols_player = 0
+      @board_cases.each do |line|
+        if line[col_nb].inner_content == player.symbol
+          nb_of_symbols_player += 1
+          return true if nb_of_symbols_player == 3
+        end
+      end
+    end
+    return false
+  end
+
+  def diagonal_victory(player)
+    # Diagonal 1
+    nb_of_symbols_player = 0
+    (0..2).each do |index|
+      if @board_cases[index][index].inner_content == player.symbol
+        nb_of_symbols_player += 1
+        return true if nb_of_symbols_player == 3
+      end
+    end
+
+    # Diagonal 2
+    nb_of_symbols_player = 0
+    col = 2
+    (0..2).each do |index|
+      if @board_cases[index][col].inner_content == player.symbol
+        nb_of_symbols_player += 1
+        return true if nb_of_symbols_player == 3
+      end
+      col -= 1
+    end
+    return false
+  end
+
+  def match_is_even
+    @board_cases.each do |line|
+      return false if line.any? { |cell| cell.inner_content == "_" }
+    end
+    return true
+  end
+
+  def won?(player)
+    if line_victory(player) == true || column_victory(player) == true || diagonal_victory(player) == true
+      puts "Bravo #{player.name} ! Tu as gagné !"
+      return true
+    elsif match_is_even == true
+      puts "Il n'y a plus de cases sur lesquelles jouer !"
+      return true
+    else
+      puts "Continuons à jouer !"
+      return false
+    end
+  end
 end

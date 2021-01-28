@@ -61,7 +61,8 @@ class Game
   end
 
   def running_game
-    while true
+    pursue_game = true
+    while pursue_game == true
       @players.each do |player|
         # On affiche la grille à jour.
         @visual_board.draw_board
@@ -74,9 +75,14 @@ class Game
           chosen_case = player.chose_case_to_play
           case_line, case_column = translate_player_decision(chosen_case)
           valid_input = case_line != false && @datas_board.is_case_available?(case_line, case_column) == true
-          pp valid_input
         end
         @datas_board.update_cases(case_line, case_column, player.symbol)
+
+        # On regarde si, par son action, le joueur a mis fin au jeu.
+        if @datas_board.won?(player) == true
+          pursue_game = !@datas_board.won?(player)
+          break
+        end
       end
     end
   end
